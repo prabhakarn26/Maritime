@@ -1,0 +1,481 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-app: #080e1e;
+    --bg-primary: #0b132b;
+    --bg-secondary: #1c2541;
+    --bg-card: rgba(15, 23, 42, 0.75);
+    --bg-card-glow: rgba(15, 23, 42, 0.85);
+    --bg-card-border: rgba(255, 255, 255, 0.08);
+    --bg-header: rgba(15, 23, 42, 0.85);
+    --bg-sidebar: rgba(10, 16, 31, 0.95);
+    --bg-input: rgba(15, 23, 42, 0.6);
+    --border-input: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-body: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent-cyan: #06b6d4;
+    --accent-blue: #3b82f6;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-rose: #f43f5e;
+    --accent-purple: #a855f7;
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --scrollbar-track: rgba(15, 23, 42, 0.6);
+    --scrollbar-thumb: rgba(56, 189, 248, 0.3);
+  }
+
+  html.light,
+  :root[data-theme="light"] {
+    --bg-app: #f4f6fb;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-glow: rgba(255, 255, 255, 0.98);
+    --bg-card-border: rgba(226, 232, 240, 0.9);
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --bg-sidebar: rgba(255, 255, 255, 0.98);
+    --bg-input: #ffffff;
+    --border-input: #cbd5e1;
+    --text-main: #0f172a;
+    --text-body: #334155;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    --scrollbar-track: #f1f5f9;
+    --scrollbar-thumb: #cbd5e1;
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Custom Glassmorphism - Dark by default */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--bg-card-border);
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.glass-panel-glow {
+  background: var(--bg-card-glow);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.1);
+}
+
+.glass-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+.glass-input:focus {
+  border-color: #0ea5e9;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+}
+
+/* Pulse Glow & Radar animation */
+@keyframes sonarPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.sonar-ring {
+  animation: sonarPulse 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+/* ========================================================================= */
+/* LIGHT THEME STYLES & OVERRIDES                                           */
+/* ========================================================================= */
+
+.light {
+  color-scheme: light;
+}
+
+/* Base Light Mode Overrides for text and background primitives */
+.light body {
+  background-color: #f4f6fb;
+  color: #0f172a;
+}
+
+/* App Containers */
+.light .app-container {
+  background-color: #f4f6fb !important;
+  color: #0f172a !important;
+}
+
+/* Headers, Sidebars & Surfaces in Light Mode */
+.light header {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.light aside {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Panels & Cards in Light Mode */
+.light .glass-panel {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03) !important;
+}
+
+.light .glass-panel-glow {
+  background: #ffffff !important;
+  border-color: rgba(14, 165, 233, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.12) !important;
+}
+
+/* Dark utility mappings translated cleanly for light mode */
+.light .bg-slate-950,
+.light .bg-slate-950\/95,
+.light .bg-slate-950\/90,
+.light .bg-slate-950\/80 {
+  background-color: #ffffff !important;
+}
+
+.light .bg-slate-900,
+.light .bg-slate-900\/90,
+.light .bg-slate-900\/80,
+.light .bg-slate-900\/60,
+.light .bg-slate-900\/50,
+.light .bg-slate-900\/40 {
+  background-color: #f8fafc !important;
+}
+
+.light .bg-slate-800,
+.light .bg-slate-800\/80,
+.light .bg-slate-800\/60,
+.light .bg-slate-800\/50 {
+  background-color: #f1f5f9 !important;
+}
+
+.light .bg-\[\#080e1e\],
+.light .bg-\[\#060b17\],
+.light .bg-\[\#0b132b\] {
+  background-color: #f4f6fb !important;
+}
+
+/* Borders in Light Mode */
+.light .border-slate-800,
+.light .border-slate-800\/90,
+.light .border-slate-800\/80,
+.light .border-slate-800\/60,
+.light .border-slate-800\/40,
+.light .border-slate-700,
+.light .border-slate-700\/80,
+.light .border-slate-700\/70,
+.light .border-slate-700\/60 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Typography in Light Mode */
+.light .text-white {
+  color: #0f172a !important;
+}
+
+.light .text-slate-100,
+.light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+.light .text-slate-300 {
+  color: #334155 !important;
+}
+
+.light .text-slate-400 {
+  color: #64748b !important;
+}
+
+.light .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+/* Inputs, Selects, and Textareas in Light Mode */
+.light input,
+.light select,
+.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.light input:focus,
+.light select:focus,
+.light textarea:focus {
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2) !important;
+}
+
+/* Disabled input fields */
+.light input:disabled,
+.light select:disabled {
+  background-color: #f1f5f9 !important;
+  color: #64748b !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Hover States in Light Mode */
+.light .hover\:bg-slate-900\/80:hover,
+.light .hover\:bg-slate-900:hover,
+.light .hover\:bg-slate-800\/90:hover,
+.light .hover\:bg-slate-800\/80:hover,
+.light .hover\:bg-slate-800:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+.light .hover\:border-slate-700:hover,
+.light .hover\:border-slate-600:hover {
+  border-color: #cbd5e1 !important;
+}
+
+/* Navigation active links in Light Mode */
+.light .from-cyan-500\/20.to-blue-500\/10 {
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.08)) !important;
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  color: #0284c7 !important;
+}
+
+/* Dark badges adapted for light mode */
+.light .bg-cyan-950,
+.light .bg-cyan-950\/80,
+.light .bg-cyan-950\/90 {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-color: #bae6fd !important;
+}
+
+.light .bg-emerald-950,
+.light .bg-emerald-950\/80 {
+  background-color: #d1fae5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+
+.light .bg-amber-950,
+.light .bg-amber-950\/80 {
+  background-color: #fef3c7 !important;
+  color: #b45309 !important;
+  border-color: #fde68a !important;
+}
+
+.light .bg-rose-950,
+.light .bg-rose-950\/80,
+.light .bg-rose-950\/30 {
+  background-color: #ffe4e6 !important;
+  color: #be123c !important;
+  border-color: #fecdd3 !important;
+}
+
+.light .bg-blue-950,
+.light .bg-blue-950\/80 {
+  background-color: #dbeafe !important;
+  color: #1d4ed8 !important;
+  border-color: #bfdbfe !important;
+}
+
+.light .bg-purple-950,
+.light .bg-purple-950\/80 {
+  background-color: #f3e8ff !important;
+  color: #7e22ce !important;
+  border-color: #e9d5ff !important;
+}
+
+/* Tables in Light Mode */
+.light table th {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+.light table td {
+  border-bottom-color: #f1f5f9 !important;
+}
+
+.light table tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* Modals & Dropdowns in Light Mode */
+.light .fixed.inset-0 .bg-slate-900,
+.light .fixed.inset-0 .bg-slate-950,
+.light [role="dialog"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #091322 !important;
+  border-radius: 0.75rem;
+}
+
+.light .leaflet-container {
+  background: #f1f5f9 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.light .leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(15, 23, 42, 0.95) !important;
+}
+
+.light .leaflet-popup-tip {
+  background: #ffffff !important;
+}
+
+/* Recharts Tooltip Styling */
+.recharts-default-tooltip {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 8px !important;
+  color: #f8fafc !important;
+}
+
+.light .recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  color: #0f172a !important;
+}
+
+/* Tactical Frigate & Port Marker Styles */
+.frigate-vessel-marker,
+.custom-port-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.weather-tooltip {
+  background: rgba(15, 23, 42, 0.92) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(244, 63, 94, 0.4) !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.light .weather-tooltip {
+  background: #ffffff !important;
+  color: #be123c !important;
+  border: 1px solid #fecdd3 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.route-tooltip {
+  background: rgba(15, 23, 42, 0.9) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
+  font-family: monospace !important;
+}
+
+.light .route-tooltip {
+  background: #ffffff !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+}
+
+/* Custom Zoom Control Styling in Leaflet */
+.leaflet-control-zoom {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+.light .leaflet-control-zoom a {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light .leaflet-control-zoom a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0284c7 !important;
+}
+
+/* Light Mode Login Hero Background Adjustments */
+.light .min-h-screen.w-full.flex.bg-\[\#060b17\] {
+  background-color: #f4f6fb !important;
+}
